@@ -178,7 +178,7 @@ public class MatrixRun extends Build<MatrixConfiguration,MatrixRun> {
 
         @Override
         protected Lease decideWorkspace(Node n, WorkspaceList wsl) throws InterruptedException, IOException {
-            MatrixProject mp = getParent().getParent();
+            MatrixProject mp = project.getParent();
 
             // lock is done at the parent level, so that concurrent MatrixProjects get respective workspace,
             // but within MatrixConfigurations that belong to the same MatrixBuild.
@@ -191,14 +191,32 @@ public class MatrixRun extends Build<MatrixConfiguration,MatrixRun> {
 
             // prepare variables that can be used in the child workspace setting
             EnvVars env = getEnvironment(listener);
-            env.put("COMBINATION",getParent().getCombination().toString('/','/'));  // e.g., "axis1/a/axis2/b"
-            env.put("SHORT_COMBINATION",getParent().getDigestName());               // e.g., "0fbcab35"
-            env.put("PARENT_WORKSPACE",baseDir.getRemote());
+            Combination combination = project.getCombination();
+
+            String comb = combination.toString('/', '/');
+            env.put("COMBINATION", comb);  // e.g., "axis1/a/axis2/b"
+
+            comb = combination.toString('/', '/');
+            env.put("COMBINATION_SLASH", comb);  // e.g., "axis1/a/axis2/b"
+
+            comb = combination.toString('/', '/').replaceAll("[\\\\/:*?\"<>|]", "_");
+            env.put("COMBINATION_UNDERSCORE", comb);  // e.g., "axis1_a_axis2_b"  下划线分割 4个斜杠在正则表达式里面表示一个斜杠。
+
+            comb = combination.toString('/', '/').replaceAll("[\\\\/:*?\"<>|]", "-");
+            env.put("COMBINATION_DASH", comb);  // e.g., "axis1_a_axis2_b"  中划线分割 4个斜杠在正则表达式里面表示一个斜杠。
+
+            String shortName = project.getDigestName();
+            env.put("SHORT_COMBINATION", shortName);               // e.g., "0fbcab35"
+
+            String parentName = baseDir.getRemote();
+            env.put("PARENT_WORKSPACE", parentName);
             env.putAll(getBuildVariables());
 
             // child workspace need no individual locks, whether or not we use custom workspace
             String childWs = mp.getChildCustomWorkspace();
-            return Lease.createLinkedDummyLease(baseDir.child(env.expand(childWs)),baseLease);
+            String expand = env.expand(childWs);
+
+            return Lease.createLinkedDummyLease(baseDir.child(expand),baseLease);
         }
     }
 }
