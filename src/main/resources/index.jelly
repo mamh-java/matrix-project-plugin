@@ -25,5 +25,5 @@ THE SOFTWARE.
 
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
-    Multi-configuration (matrix) project type.
+    A multi-configuration project is useful for instances where your builds will make many similar build steps, and you would otherwise be duplicating steps.
 </j:jelly>
