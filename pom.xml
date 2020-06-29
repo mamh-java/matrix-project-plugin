@@ -6,29 +6,42 @@
         <version>4.2</version>
         <relativePath />
     </parent>
+
     <artifactId>matrix-project</artifactId>
     <version>1.18-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>Matrix Project Plugin</name>
     <description>Multi-configuration (matrix) project type.</description>
-    <url>https://github.com/jenkinsci/matrix-project-plugin</url>
+    <url>https://github.com/mamh-java/matrix-project-plugin.git</url>
+
     <properties>
-      <jenkins.version>2.164.3</jenkins.version>
+      <jenkins.version>2.222.3</jenkins.version>
       <java.level>8</java.level>
-      <spotbugs.skip>true</spotbugs.skip> <!-- Clean up redundant null check warnings and re-enable after SECURITY-1339 is released -->
+      <spotbugs.skip>true</spotbugs.skip>
     </properties>
+
+    <developers>
+        <developer>
+            <id>bright</id>
+            <name>bright ma</name>
+            <email>bright@mage.com</email>
+        </developer>
+    </developers>
+
     <licenses>
         <license>
             <name>MIT License</name>
             <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
+
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
+        <connection>scm:git:https://github.com/mamh-java/matrix-project-plugin.git</connection>
+        <developerConnection>scm:git:https://github.com/mamh-java/matrix-project-plugin.git</developerConnection>
+        <url>https://github.com/mamh-java/matrix-project-plugin</url>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
+
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
@@ -63,13 +76,6 @@
             <version>2.5</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.modules</groupId>
-            <artifactId>sshd</artifactId>
-            <version>2.6</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
