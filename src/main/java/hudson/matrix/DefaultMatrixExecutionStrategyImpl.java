@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 import javax.annotation.Nullable;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -39,6 +40,8 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * @since 1.456
  */
 public class DefaultMatrixExecutionStrategyImpl extends MatrixExecutionStrategy {
+    private static final Logger LOGGER = Logger.getLogger(DefaultMatrixExecutionStrategyImpl.class.getName());
+
     private volatile boolean runSequentially;
 
     /**
@@ -252,8 +255,12 @@ public class DefaultMatrixExecutionStrategyImpl extends MatrixExecutionStrategy 
         MatrixBuild build = exec.getBuild();
         exec.getListener().getLogger().println(Messages.MatrixBuild_Triggering(ModelHyperlinkNote.encodeTo(c)));
 
+        LOGGER.info(Messages.MatrixBuild_Triggering( c.getCombination().toString('/', '/') +
+        " with this MatrixExecutionStrategy: " +
+        String.format("%s, %s, %s, %s", runSequentially, touchStoneCombinationFilter, touchStoneResultCondition, sorter)));
+
         // filter the parent actions for those that can be passed to the individual jobs.
-        List<Action> childActions = new ArrayList<Action>(build.getActions(MatrixChildAction.class));
+        List<Action> childActions = new ArrayList<>(build.getActions(MatrixChildAction.class));
         childActions.addAll(build.getActions(ParametersAction.class)); // used to implement MatrixChildAction
         c.scheduleBuild(childActions, new UpstreamCause((Run)build));
     }
