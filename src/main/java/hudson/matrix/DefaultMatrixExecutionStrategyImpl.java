@@ -55,11 +55,22 @@ public class DefaultMatrixExecutionStrategyImpl extends MatrixExecutionStrategy 
     private volatile MatrixConfigurationSorter sorter;
 
     @DataBoundConstructor
-    public DefaultMatrixExecutionStrategyImpl(Boolean runSequentially, boolean hasTouchStoneCombinationFilter, String touchStoneCombinationFilter, Result touchStoneResultCondition, MatrixConfigurationSorter sorter) {
+    public DefaultMatrixExecutionStrategyImpl(Boolean runSequentially,
+        boolean hasTouchStoneCombinationFilter, String touchStoneCombinationFilter, Result touchStoneResultCondition,
+        boolean hasSortExecutionbuild, MatrixConfigurationSorter sorter) {
         this(runSequentially!=null ? runSequentially : false,
             hasTouchStoneCombinationFilter ? touchStoneCombinationFilter : null,
             hasTouchStoneCombinationFilter ? touchStoneResultCondition : null,
-            sorter);
+            hasSortExecutionbuild? sorter: null);
+    }
+
+    public DefaultMatrixExecutionStrategyImpl(Boolean runSequentially,
+        boolean hasTouchStoneCombinationFilter, String touchStoneCombinationFilter, Result touchStoneResultCondition,
+        MatrixConfigurationSorter sorter) {
+        this(runSequentially!=null ? runSequentially : false,
+                hasTouchStoneCombinationFilter ? touchStoneCombinationFilter : null,
+                hasTouchStoneCombinationFilter ? touchStoneResultCondition : null,
+                sorter);
     }
 
     public DefaultMatrixExecutionStrategyImpl(boolean runSequentially, String touchStoneCombinationFilter, Result touchStoneResultCondition, MatrixConfigurationSorter sorter) {
