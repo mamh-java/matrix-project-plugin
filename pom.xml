@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.2</version>
+        <version>3.5</version>
         <relativePath />
     </parent>
 
@@ -17,6 +17,7 @@
     <properties>
       <jenkins.version>2.222.3</jenkins.version>
       <java.level>8</java.level>
+        <slf4jVersion>1.7.26</slf4jVersion>
       <spotbugs.skip>true</spotbugs.skip>
     </properties>
 
@@ -79,11 +80,19 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+            <version>3.3.3</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.objenesis</groupId>
+                    <artifactId>objenesis</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
+            <version>2.0.7</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -95,6 +104,7 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito2</artifactId>
+            <version>2.0.7</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
