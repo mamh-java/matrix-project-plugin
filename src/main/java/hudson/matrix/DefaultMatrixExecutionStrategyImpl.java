@@ -91,6 +91,10 @@ public class DefaultMatrixExecutionStrategyImpl extends MatrixExecutionStrategy 
         return touchStoneCombinationFilter!=null;
     }
 
+    public boolean getHasSortExecutionbuild(){
+        return sorter != null;
+    }
+
     /**
      * If true, {@link MatrixRun}s are run sequentially, instead of running in parallel.
      *
