@@ -158,6 +158,36 @@ public abstract class Layouter<T> {
         };
     }
 
+    public List<List<T>> getAgentTable(){
+        List<Row> rows = getRows();
+        Column column = rows.get(0).get(0);
+        int size = column.size();
+
+        int cNum = 5; // 每行 5 个元素
+        int rNum = (int) Math.ceil((double)size / cNum);
+
+        // 要把 一维 list 转换为 二维的list.
+        List<List<T>> twoDlist = new ArrayList<>();
+        for(int i=0; i < rNum; i++){
+            twoDlist.add(new ArrayList<>(cNum));
+            for(int j = 0; j < cNum; j++){
+                int position = i*cNum + j;
+                if(position < size) {
+                    twoDlist.get(i).add(column.get(position));
+                }
+            }
+        }
+        return twoDlist;
+    }
+
+
+
+    public List<Row> getLabelTable(){
+        List<Row> rows = getRows();
+
+        return rows;
+    }
+
     /**
      * Represents a row, which is a collection of {@link Column}s.
      */
