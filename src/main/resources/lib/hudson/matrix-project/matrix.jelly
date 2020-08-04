@@ -48,20 +48,21 @@ THE SOFTWARE.
       <j:when test="${empty(o.x) and empty(o.y)}">
         <table id="configuration-matrix">
           <tr class="matrix-row">
-            <td class="matrix-header">
+            <td class="matrix-title">
               ${%Configurations}
             </td>
           </tr>
-          <j:forEach var="p" items="${o.rows[0][0]}"><!--o.rows size是1-->
+          <j:forEach var="r" items="${o.agentTable}">
             <tr>
-              <td class="matrix-leftcolumn">
-                ${p.assignedLabel}
-              </td>
-              <td class="matrix-cell">
-                <div>
-                  <d:invokeBody/>
-                </div>
-              </td>
+                <td class="matrix-header">
+                </td>
+                <j:forEach var="p" items="${r}">
+                  <td class="matrix-cell">
+                    <div>
+                      <d:invokeBody/>
+                    </div>
+                  </td>
+                </j:forEach>
             </tr>
           </j:forEach>
         </table>
@@ -86,7 +87,7 @@ THE SOFTWARE.
           </j:forEach>
 
           <!-- Y-axis -->
-          <j:forEach var="r" items="${o.rows}">
+          <j:forEach var="r" items="${o.labelTable}">
             <tr>
               <j:forEach var="y" items="${o.y}" varStatus="loop">
                 <j:if test="${r.drawYHeader(loop.index)!=null}">
