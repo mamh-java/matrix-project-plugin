@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>matrix-project</artifactId>
-    <version>1.18-SNAPSHOT</version>
+    <version>1.18</version>
     <packaging>hpi</packaging>
     <name>Matrix Project Plugin</name>
     <description>Multi-configuration (matrix) project type.</description>
@@ -40,7 +40,7 @@
         <connection>scm:git:https://github.com/mamh-java/matrix-project-plugin.git</connection>
         <developerConnection>scm:git:https://github.com/mamh-java/matrix-project-plugin.git</developerConnection>
         <url>https://github.com/mamh-java/matrix-project-plugin</url>
-      <tag>HEAD</tag>
+      <tag>matrix-project-1.18</tag>
     </scm>
 
     <repositories>
