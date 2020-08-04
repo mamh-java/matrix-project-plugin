@@ -51,11 +51,17 @@ THE SOFTWARE.
             <td class="matrix-title">
               ${%Configurations}
             </td>
+            <td class="matrix-title"/>
+            <td class="matrix-title"/>
+            <td class="matrix-title"/>
+            <td class="matrix-title"/>
+            <td class="matrix-title"/>
           </tr>
           <j:forEach var="r" items="${o.agentTable}">
             <tr>
-                <td class="matrix-header">
-                </td>
+              <td class="matrix-leftcolumn">
+                ${o.z[0].name}
+              </td>
                 <j:forEach var="p" items="${r}">
                   <td class="matrix-cell">
                     <div>
